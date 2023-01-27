@@ -1,5 +1,8 @@
 package agenda.synchro.rdv;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class RDV {
     private int idRDV;
     private String name;
@@ -61,12 +64,16 @@ public class RDV {
 
     @Override
     public String toString() {
-        return "RDV{" +
-                "idRDV=" + idRDV +
-                ", name='" + name + '\'' +
-                ", date='" + date + '\'' +
-                ", time='" + time + '\'' +
-                ", location='" + location + '\'' +
-                '}';
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("idRDV", idRDV);
+            jsonObject.put("name", name);
+            jsonObject.put("date", date);
+            jsonObject.put("time", time);
+            jsonObject.put("location", location);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject.toString();
     }
 }
