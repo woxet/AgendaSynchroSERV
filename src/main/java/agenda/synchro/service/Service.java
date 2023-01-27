@@ -3,6 +3,8 @@ package agenda.synchro.service;
 import agenda.synchro.rdv.Database;
 import agenda.synchro.rdv.RDV;
 import com.owlike.genson.Genson;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.validation.constraints.Null;
 import javax.ws.rs.*;
@@ -21,9 +23,17 @@ public class Service {
     @GET
     @Path("/getall")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getRDV(){
-        return Database.list.toString();
+    public String getAllRDV() {
+        JSONArray jsonArray = new JSONArray();
+        for (RDV rdv : Database.list) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("idRDV", rdv.getIdRDV());
+            jsonObject.put("name", rdv.getName());
+            jsonArray.put(jsonObject);
+        }
+        return jsonArray.toString();
     }
+
 
     @PUT
     @Path("/update")
