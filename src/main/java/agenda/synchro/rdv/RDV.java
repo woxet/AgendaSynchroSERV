@@ -22,6 +22,18 @@ public class RDV {
         this.setLocation(location);
     }
 
+    public RDV(String name, String date, String time, String location){
+        this.setName(name);
+        this.setDate(date);
+        this.setTime(time);
+        this.setLocation(location);
+    }
+
+    public RDV(int idRDV, String name){
+        this.idRDV = idRDV;
+        this.name = name;
+    }
+
     public int getIdRDV() {
         return idRDV;
     }
