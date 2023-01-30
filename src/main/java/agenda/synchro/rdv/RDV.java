@@ -76,16 +76,7 @@ public class RDV {
 
     @Override
     public String toString() {
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("idRDV", idRDV);
-            jsonObject.put("name", name);
-            jsonObject.put("date", date);
-            jsonObject.put("time", time);
-            jsonObject.put("location", location);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return jsonObject.toString();
+        Gson gson = new Gson();
+        return gson.toJson(this);
     }
 }
