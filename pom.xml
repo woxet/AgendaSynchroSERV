@@ -54,6 +54,11 @@
       <artifactId>json</artifactId>
       <version>20220924</version>
     </dependency>
+    <dependency>
+      <groupId>com.ibm.icu</groupId>
+      <artifactId>icu4j</artifactId>
+      <version>70.1</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>ASI</finalName>

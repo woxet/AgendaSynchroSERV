@@ -31,7 +31,7 @@ This is the output of a JSP page that is part of the Hello, World
 application.
 
 
-<%= new String("Hello!") %>
+<%="Hello!" %>
 
 </body>
 </html>

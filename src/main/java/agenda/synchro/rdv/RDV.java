@@ -1,20 +1,20 @@
 package agenda.synchro.rdv;
 
+import com.owlike.genson.Genson;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class RDV {
     private int idRDV;
     private String name;
-    private String date;
+    private Date date;
     private String time;
     private String location;
 
-    public RDV(){
-        this(0,"unknown","unknown","unknown","unknown");
-    }
-
-    public RDV(int idRDV, String name, String date, String time, String location){
+    public RDV(int idRDV, String name, Date date, String time, String location){
         this.setIdRDV(idRDV);
         this.setName(name);
         this.setDate(date);
@@ -22,7 +22,7 @@ public class RDV {
         this.setLocation(location);
     }
 
-    public RDV(String name, String date, String time, String location){
+    public RDV(String name, Date date, String time, String location){
         this.setName(name);
         this.setDate(date);
         this.setTime(time);
@@ -34,9 +34,7 @@ public class RDV {
         this.name = name;
     }
 
-    public int getIdRDV() {
-        return idRDV;
-    }
+    public int getIdRDV() {return idRDV;}
 
     public void setIdRDV(int idRDV) {
         this.idRDV = idRDV;
@@ -51,10 +49,12 @@ public class RDV {
     }
 
     public String getDate() {
-        return date;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println("DATE : "+  dateFormat.format(this.date));
+        return dateFormat.format(this.date);
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -76,7 +76,13 @@ public class RDV {
 
     @Override
     public String toString() {
-        Gson gson = new Gson();
-        return gson.toJson(this);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return "{" +
+                "\"idRDV\": " + idRDV +
+                ", \"name\": \"" + name + '\"' +
+                ", \"date\": \"" + getDate() + '\"' +
+                ", \"time\": \"" + time + '\"' +
+                ", \"location\": \"" + location + '\"' +
+                '}';
     }
 }

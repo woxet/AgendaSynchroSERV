@@ -32,7 +32,7 @@ public class Service {
             jsonObject.put("name", rdv.getName());
             jsonArray.put(jsonObject);
         }
-        System.out.println("GET DATE SEND : " + jsonArray.toString());
+        System.out.println("GET DATE SEND : " + jsonArray);
 
         return jsonArray.toString();
     }
@@ -43,19 +43,7 @@ public class Service {
     public String getAllRDV() {
         System.out.println("GET ALL");
 
-        JSONArray jsonArray = new JSONArray();
-        for (RDV rdv : Database.list) {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("idRDV", rdv.getIdRDV());
-            jsonObject.put("name", rdv.getName());
-            jsonObject.put("date", rdv.getDate());
-            jsonObject.put("time", rdv.getTime());
-            jsonObject.put("localisation", rdv.getLocation());
-            jsonArray.put(jsonObject);
-        }
-        System.out.println("GET ALL SEND : " + jsonArray.toString());
-
-        return jsonArray.toString();
+        return Database.list.toString();
     }
 
     @PUT
