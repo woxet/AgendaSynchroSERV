@@ -30,6 +30,7 @@ public class Service {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("idRDV", rdv.getIdRDV());
             jsonObject.put("name", rdv.getName());
+            jsonObject.put("time", rdv.getTime());
             jsonArray.put(jsonObject);
         }
         System.out.println("GET DATE SEND : " + jsonArray);

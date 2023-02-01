@@ -1,9 +1,5 @@
 package agenda.synchro.rdv;
 
-import com.owlike.genson.Genson;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -11,10 +7,10 @@ public class RDV {
     private int idRDV;
     private String name;
     private Date date;
-    private String time;
+    private Date time;
     private String location;
 
-    public RDV(int idRDV, String name, Date date, String time, String location){
+    public RDV(int idRDV, String name, Date date, Date time, String location){
         this.setIdRDV(idRDV);
         this.setName(name);
         this.setDate(date);
@@ -22,7 +18,7 @@ public class RDV {
         this.setLocation(location);
     }
 
-    public RDV(String name, Date date, String time, String location){
+    public RDV(String name, Date date, Date time, String location){
         this.setName(name);
         this.setDate(date);
         this.setTime(time);
@@ -48,21 +44,15 @@ public class RDV {
         this.name = name;
     }
 
-    public String getDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println("DATE : "+  dateFormat.format(this.date));
-        return dateFormat.format(this.date);
-    }
+    public Date getDate() { return this.date; }
 
     public void setDate(Date date) {
         this.date = date;
     }
 
-    public String getTime() {
-        return time;
-    }
+    public Date getTime() { return this.time; }
 
-    public void setTime(String time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 
@@ -76,12 +66,11 @@ public class RDV {
 
     @Override
     public String toString() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return "{" +
                 "\"idRDV\": " + idRDV +
                 ", \"name\": \"" + name + '\"' +
-                ", \"date\": \"" + getDate() + '\"' +
-                ", \"time\": \"" + time + '\"' +
+                ", \"date\": \"" + Database.dateFormat.format(getDate()) + '\"' +
+                ", \"time\": \"" + Database.timeFormat.format(getTime()) + '\"' +
                 ", \"location\": \"" + location + '\"' +
                 '}';
     }

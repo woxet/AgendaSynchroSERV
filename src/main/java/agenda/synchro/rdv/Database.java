@@ -1,30 +1,72 @@
 package agenda.synchro.rdv;
 
-import agenda.synchro.rdv.RDV;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 public class Database {
+    public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    public static SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+
     public static ArrayList<RDV> list = new ArrayList<>();
     static {
-        Date date = Calendar.getInstance().getTime();
+        Calendar c = Calendar.getInstance();
+        Date date = c.getTime();
 
-        list.add(new RDV(0, "date avec michel", date, "17:00", "9 3/4"));
-        list.add(new RDV(1, "Medecin", date, "09:00", "Amiens Hopital"));
-        list.add(new RDV(2, "Dentiste", date, "10:00", "Amiens Clinique"));
-        list.add(new RDV(3, "Ophtalmologiste", date, "11:00", "Amiens Centre"));
-        list.add(new RDV(4, "Gynécologue", date, "14:00", "Amiens Hopital"));
-        list.add(new RDV(5, "Psychologue", date, "15:00", "Amiens Centre"));
-        list.add(new RDV(6, "Orthodontiste", date, "16:00", "Amiens Clinique"));
-        list.add(new RDV(7, "Cardiologue", date, "09:00", "Amiens Hopital"));
-        list.add(new RDV(8, "Dermatologue", date, "10:00", "Amiens Centre"));
-        list.add(new RDV(9, "Pédiatre", date, "11:00", "Amiens Clinique"));
-        list.add(new RDV(10, "Généraliste", date, "14:00", "Amiens Hopital"));
+        c.set(Calendar.HOUR_OF_DAY, 16);
+        c.set(Calendar.MINUTE, 15);
+        Date time = c.getTime();
+        list.add(new RDV(0, "date avec michel", date, time, "9 3/4"));
+
+        c.set(Calendar.HOUR_OF_DAY, 9);
+        c.set(Calendar.MINUTE, 15);
+        time = c.getTime();
+        list.add(new RDV(1, "Medecin", date, time, "Amiens Hopital"));
+
+        c.set(Calendar.HOUR_OF_DAY, 10);
+        c.set(Calendar.MINUTE, 45);
+        time = c.getTime();
+        list.add(new RDV(2, "Dentiste", date, time, "Amiens Clinique"));
+
+        c.set(Calendar.HOUR_OF_DAY, 17);
+        c.set(Calendar.MINUTE, 0);
+        time = c.getTime();
+        list.add(new RDV(3, "Ophtalmologiste", date, time, "Amiens Centre"));
+
+        c.set(Calendar.HOUR_OF_DAY, 8);
+        c.set(Calendar.MINUTE, 30);
+        time = c.getTime();
+        list.add(new RDV(4, "Gynécologue", date, time, "Amiens Hopital"));
+
+        c.set(Calendar.HOUR_OF_DAY, 11);
+        c.set(Calendar.MINUTE, 30);;
+        time = c.getTime();
+        list.add(new RDV(5, "Psychologue", date, time, "Amiens Centre"));
+
+        c.set(Calendar.HOUR_OF_DAY, 15);
+        c.set(Calendar.MINUTE, 30);
+        time = c.getTime();
+        list.add(new RDV(6, "Orthodontiste", date, time, "Amiens Clinique"));
+
+        c.set(Calendar.HOUR_OF_DAY, 12);
+        c.set(Calendar.MINUTE, 35);
+        time = c.getTime();
+        list.add(new RDV(7, "Cardiologue", date, time, "Amiens Hopital"));
+
+        c.set(Calendar.HOUR_OF_DAY, 14);
+        c.set(Calendar.MINUTE, 45);
+        time = c.getTime();
+        list.add(new RDV(8, "Dermatologue", date, time, "Amiens Centre"));
+
+        c.set(Calendar.HOUR_OF_DAY, 11);
+        c.set(Calendar.MINUTE, 35);
+        time = c.getTime();
+        list.add(new RDV(9, "Pédiatre", date, time, "Amiens Clinique"));
+
+        c.set(Calendar.HOUR_OF_DAY, 10);
+        c.set(Calendar.MINUTE, 10);
+        time = c.getTime();
+        list.add(new RDV(10, "Généraliste", date, time, "Amiens Hopital"));
     }
 
     public static ArrayList<RDV> searchByDate(String date) {
@@ -44,25 +86,14 @@ public class Database {
     }
 
     public static ArrayList<RDV> sortRDVArrayByTime(ArrayList<RDV> rdvArray) {
-        for (int i = 0; i < rdvArray.size() - 1; i++) {
-            int index = i;
-            for (int j = i + 1; j < rdvArray.size(); j++) {
-                SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-                try {
-                    Date time1 = format.parse(rdvArray.get(j).getTime());
-                    Date time2 = format.parse(rdvArray.get(index).getTime());
-                    if (time1.before(time2)) {
-                        index = j;
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+        Collections.sort(rdvArray, new Comparator<RDV>() {
+            @Override
+            public int compare(RDV rdv1, RDV rdv2) {
+                return rdv1.getTime().compareTo(rdv2.getTime());
             }
-            RDV smallerRDV = rdvArray.get(i);
-            rdvArray.set(index, smallerRDV);
-            rdvArray.set(i, rdvArray.get(index));
-        }
+        });
         return rdvArray;
     }
+
 
 }
