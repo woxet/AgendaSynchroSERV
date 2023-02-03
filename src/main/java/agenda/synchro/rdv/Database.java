@@ -16,7 +16,7 @@ public class Database {
         c.set(Calendar.HOUR_OF_DAY, 16);
         c.set(Calendar.MINUTE, 15);
         Date time = c.getTime();
-        list.add(new RDV(0, "date avec michel", date, time, "9 3/4"));
+        list.add(new RDV(0, "Soutenance", date, time, "9 3/4"));
 
         c.set(Calendar.HOUR_OF_DAY, 9);
         c.set(Calendar.MINUTE, 15);
@@ -75,24 +75,25 @@ public class Database {
         // Parcours le tableau de RDV
         for (RDV rdv : list) {
             // Si la date du RDV est égale à la date recherchée
-            if (rdv.getDate().equals(date)) {
+            if (dateFormat.format(rdv.getDate()).equals(date)) {
                 // Ajoute le RDV au tableau de résultats
                 result.add(rdv);
             }
         }
-        result = sortRDVArrayByTime(result);
+        sortRDVArrayByTime(result);
         // Retourne le tableau de résultats
         return result;
     }
 
-    public static ArrayList<RDV> sortRDVArrayByTime(ArrayList<RDV> rdvArray) {
+    public static void sortRDVArrayByTime(ArrayList<RDV> rdvArray) {
         Collections.sort(rdvArray, new Comparator<RDV>() {
             @Override
             public int compare(RDV rdv1, RDV rdv2) {
+                //System.out.println(rdv1.getDate() + "  " + rdv2.getDate());
                 return rdv1.getTime().compareTo(rdv2.getTime());
             }
         });
-        return rdvArray;
+
     }
 
 

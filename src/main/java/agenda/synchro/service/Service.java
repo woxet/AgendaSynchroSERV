@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.xml.crypto.Data;
 
 @Path("/rdv")
 public class Service {
@@ -30,7 +31,7 @@ public class Service {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("idRDV", rdv.getIdRDV());
             jsonObject.put("name", rdv.getName());
-            jsonObject.put("time", rdv.getTime());
+            jsonObject.put("time", Database.timeFormat.format(rdv.getTime()));
             jsonArray.put(jsonObject);
         }
         System.out.println("GET DATE SEND : " + jsonArray);
