@@ -9,6 +9,9 @@ import org.json.JSONObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.xml.crypto.Data;
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.util.Scanner;
 
 @Path("/rdv")
 public class Service {
@@ -51,12 +54,11 @@ public class Service {
     @PUT
     @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
-    public boolean updateRDV(String json) {
-        RDV rdv = new Genson().deserialize(json, RDV.class);
+    @Produces(MediaType.TEXT_PLAIN)
+    public boolean updateRDV(RDV json) {
+        System.out.println("UPDATE");
 
-        System.out.println("UPDATE : " + rdv);
-
-        Database.list.set(rdv.getIdRDV(),rdv);
+        System.out.println("UPDATE : " + json.toString());
 
         System.out.println("UPDATE : Done");
 
@@ -66,15 +68,15 @@ public class Service {
     @POST
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
-    public boolean addRDV(String json) {
-        RDV rdv = new Genson().deserialize(json, RDV.class);
-        System.out.println("ADD : " + rdv.toString());
+    public boolean addRDV(RDV json) {
+        //RDV rdv = new Genson().deserialize(json, RDV.class);
+        System.out.println("ADD : " + json);
 
         // traitement des données de l'objet RDV
         int index = Database.list.size();
-        rdv.setIdRDV(index);
-        System.out.println(rdv);
-        Database.list.add(rdv);
+        json.setIdRDV(index);
+        System.out.println(json);
+        Database.list.add(json);
         System.out.println(Database.list.get(index));
         System.out.println("ADD : Done");
         return true;
@@ -82,6 +84,7 @@ public class Service {
 
     @GET
     @Path("/delete/{idRDV}")
+    @Produces(MediaType.TEXT_PLAIN)
     public boolean deleteRDV(@PathParam("idRDV") int idRDV){
         System.out.println("DELETE : " + idRDV);
 

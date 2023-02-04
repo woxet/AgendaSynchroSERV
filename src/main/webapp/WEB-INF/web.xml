@@ -14,7 +14,7 @@
 
   <servlet-mapping>
     <servlet-name>RDV</servlet-name>
-    <url-pattern>/rest/*</url-pattern>
+    <url-pattern>/*</url-pattern>
   </servlet-mapping>
 
   <welcome-file-list>

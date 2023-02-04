@@ -1,6 +1,7 @@
 package agenda.synchro.rdv;
 
 import com.owlike.genson.annotation.JsonDateFormat;
+import com.owlike.genson.annotation.JsonProperty;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.text.SimpleDateFormat;
@@ -8,12 +9,21 @@ import java.util.Date;
 
 @XmlRootElement
 public class RDV {
+
+    @JsonProperty("idRDV")
     private int idRDV;
+
+    @JsonProperty("name")
     private String name;
+
+    @JsonProperty("date")
     @JsonDateFormat("yyyy-MM-dd")
     private Date date;
+
+    @JsonProperty("time")
     @JsonDateFormat("HH:mm")
     private Date time;
+    @JsonProperty("location")
     private String location;
 
     public RDV(int idRDV, String name, Date date, Date time, String location){
