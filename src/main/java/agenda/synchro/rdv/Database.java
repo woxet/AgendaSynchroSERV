@@ -16,7 +16,7 @@ public class Database {
         c.set(Calendar.HOUR_OF_DAY, 16);
         c.set(Calendar.MINUTE, 15);
         Date time = c.getTime();
-        list.add(new RDV(0, "Soutenance", date, time, "9 3/4"));
+        list.add(new RDV(0, "Soutenance", date, time, "UPJV"));
 
         c.set(Calendar.HOUR_OF_DAY, 9);
         c.set(Calendar.MINUTE, 15);

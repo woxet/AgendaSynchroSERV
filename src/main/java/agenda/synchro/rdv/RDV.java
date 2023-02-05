@@ -4,7 +4,6 @@ import com.owlike.genson.annotation.JsonDateFormat;
 import com.owlike.genson.annotation.JsonProperty;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @XmlRootElement
@@ -26,6 +25,13 @@ public class RDV {
     @JsonProperty("location")
     private String location;
 
+    public RDV() {
+        this.setIdRDV(-1);
+        this.setName("unknown");
+        this.setDate(null);
+        this.setTime(null);
+        this.setLocation("unknown");
+    }
     public RDV(int idRDV, String name, Date date, Date time, String location){
         this.setIdRDV(idRDV);
         this.setName(name);
@@ -35,6 +41,7 @@ public class RDV {
     }
 
     public RDV(String name, Date date, Date time, String location){
+        this.setIdRDV(-1);
         this.setName(name);
         this.setDate(date);
         this.setTime(time);

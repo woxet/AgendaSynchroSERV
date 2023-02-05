@@ -53,12 +53,16 @@ public class Service {
 
     @PUT
     @Path("/update")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
-    public boolean updateRDV(RDV json) {
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
+    public boolean updateRDV(String json) {
         System.out.println("UPDATE");
 
-        System.out.println("UPDATE : " + json.toString());
+        RDV rdv = new Genson().deserialize(json, RDV.class);
+
+        System.out.println("UPDATE : " + rdv.toString());
+
+        Database.list.set(rdv.getIdRDV(),rdv);
 
         System.out.println("UPDATE : Done");
 
@@ -67,16 +71,17 @@ public class Service {
 
     @POST
     @Path("/add")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public boolean addRDV(RDV json) {
-        //RDV rdv = new Genson().deserialize(json, RDV.class);
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
+    public boolean addRDV(String json) {
         System.out.println("ADD : " + json);
+        RDV rdv = new Genson().deserialize(json, RDV.class);
 
         // traitement des données de l'objet RDV
         int index = Database.list.size();
-        json.setIdRDV(index);
+        rdv.setIdRDV(index);
         System.out.println(json);
-        Database.list.add(json);
+        Database.list.add(rdv);
         System.out.println(Database.list.get(index));
         System.out.println("ADD : Done");
         return true;
