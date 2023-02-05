@@ -86,7 +86,7 @@ public class Database {
     }
 
     public static void sortRDVArrayByTime(ArrayList<RDV> rdvArray) {
-        Collections.sort(rdvArray, new Comparator<RDV>() {
+        rdvArray.sort(new Comparator<RDV>() {
             @Override
             public int compare(RDV rdv1, RDV rdv2) {
                 //System.out.println(rdv1.getDate() + "  " + rdv2.getDate());
